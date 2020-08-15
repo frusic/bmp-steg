@@ -3,36 +3,57 @@
 from functions import *
 
 def call():
-# Variables
-    imageName = input("Please enter name of image to be processed: ")
-    if imageName.endswith(".bmp"):
-        imageName.replace(".bmp","")
-    fileName = input("Please enter name of text file to be hidden: ")
-    if imageName.endswith(".txt"):
-        imageName.replace(".txt","")
+    # Get filenames
+    imageName = input('Please enter name of image to be processed: ')
+    if imageName.endswith('.bmp'):
+        imageName = imageName[:-4]
+    fileName = input('Please enter name of text file to be hidden: ')
+    if fileName.endswith('.txt'):
+        fileName = fileName[:-4]
+    
+    # Open image
     im = openImage(imageName)
-    dr = ImageDraw.Draw(im)
     xy = (0,0)
     size = im.size
+    capacity = (size[0] * size[1])*3
     channel = 0
-    tx = txt2Bin(openText(fileName),size)
-    while tx==False:
-        print("More info than can be encoded!")
-        tx = txt2Bin(openText(),size)
+
+    # Open plaintext
+    plaintext = openText(fileName).strip('\r')
+    check = False
+    while check is False:
+        check = encrypt(plaintext.encode('ascii','ignore'))
+    ciphertext = check
+    tx = txt2Bin(ciphertext)
+    if len(tx) > capacity:
+        print('More data given than can fit in the image!')
+        print('Given',size,'size and',capacity,'capacity and',len(tx),'length')
+        im.close()
+        return 1
+
+    # Create a copy
+    imEdit = im.copy()
+    dr = ImageDraw.Draw(imEdit)
 
     # Edit pixel data accordingly to bit stream
-    print("Hiding info...")
+    print('Hiding info...')
     for bit in tx:
-        encodeBit(im,dr,bit,xy,channel)
-        if channel != 2:
-            channel += 1
-        else:
+        encodeBit(imEdit,dr,bit,xy,channel)
+        channel += 1
+        if channel > 2:
             xy = incrementCoord(xy,size)
             channel = 0
 
     # Save to new file
-    print("Info hidden, saving edit...")
-    im.save(imageName + "_edit.bmp")
-    calcCover(xy,size)
-    print("Done!")
+    print('Info hidden, saving edit...')
+    imEdit.save(imageName + '_edit.bmp')
+
+    # Calculate image coverage
+    cover = len(tx)/capacity * 100
+    print('File coverage is ' + str(round(cover,1)) + '%')
+
+    im.close()
+    imEdit.close()
+    print('Done!')
+    return 0
 
