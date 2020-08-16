@@ -14,7 +14,7 @@ https://github.com/pyca/cryptography
 ## Use
 Open main.py with python3:
 ```py
-    python3 main.py
+python3 main.py
 ```
 There is a text interface that allows encoding info to an image, decoding info from one original and one modified image, and stripping the LSB from an image.
 
@@ -26,7 +26,7 @@ After encoding 500 paragraphs of Lorem ipsum:
 ![image_edit](https://github.com/frUSIc/bmp-steg/blob/master/img/image_edit.bmp)
 
 LSB Strip of image without steganography:
-![LSB Strip of image]https://github.com/frUSIc/bmp-steg/blob/master/img/image_strip.bmp)
+![LSB Strip of image](https://github.com/frUSIc/bmp-steg/blob/master/img/image_strip.bmp)
 
 LSB Strip of image with steganography:
 ![LSB Strip of image_edit](https://github.com/frUSIc/bmp-steg/blob/master/img/image_edit_strip.bmp)
