@@ -20,13 +20,13 @@ There is a text interface that allows encoding info to an image, decoding info f
 
 ## Demonstration
 Here we have an image of a city:
-![image](https://i.imgur.com/VtNXDMT.png)
+![image](https://github.com/frUSIc/bmp-steg/blob/master/img/image.bmp)
 
 After encoding 500 paragraphs of Lorem ipsum:
-![image_edit](https://i.imgur.com/bsB8t3s.png)
+![image_edit](https://github.com/frUSIc/bmp-steg/blob/master/img/image_edit.bmp)
 
 LSB Strip of image without steganography:
-![LSB Strip of image](https://i.imgur.com/XXvNzAG.png)
+![LSB Strip of image]https://github.com/frUSIc/bmp-steg/blob/master/img/image_strip.bmp)
 
 LSB Strip of image with steganography:
-![LSB Strip of image_edit](https://i.imgur.com/EPQN8UY.png)
+![LSB Strip of image_edit](https://github.com/frUSIc/bmp-steg/blob/master/img/image_edit_strip.bmp)
